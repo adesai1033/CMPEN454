@@ -1,0 +1,1 @@
+writeSuccess = ascii_out(corners, cornersFound, filename)

@@ -1,0 +1,1 @@
+rMatrix = harris_r_score(Gx, Gy, N)

@@ -1,0 +1,1 @@
+[Gx, Gy] = image_gradient(imageTransform)

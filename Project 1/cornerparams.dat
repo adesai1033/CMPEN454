@@ -1,0 +1,27 @@
+%sample file of input parameters for CMPEN/EE Project 1 
+%It is an ASCII file, human readable and editable.  Any lines
+%beginning with a percent sign '%' character are comments, and are
+%ignored by the parameter reading routine.
+%
+%First parameter, a string containing the filename to read.  This should be
+%the full pathname to the file. 
+%./checkerboard.jpg
+%./stickfiguredance.jpg
+%./psulion.jpg
+./psutd.jpg
+%
+%Second parameter, floating point number containing standard deviation of
+%the Gaussian smoothing kernel to apply to the image
+1.0
+%
+%Third parameter, integer number N specify width and height of an NxN
+%square neighborhood around every pixel within which the sums of products
+%of gradient components are accumlated.
+7
+%
+%Fourth parameter, integer specifying  the radius of local neighborhood around
+%each extracted corner within which to supporess any further corner responses.
+3
+%
+%Fifth parameter, integer specifying number of corners we want to detect.
+100

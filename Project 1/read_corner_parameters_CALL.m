@@ -1,0 +1,1 @@
+[filename,S,N,D,M] = read_corner_parameters('cornerparams.dat')

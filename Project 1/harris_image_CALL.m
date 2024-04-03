@@ -1,0 +1,1 @@
+success = harris_image(rMatrix)

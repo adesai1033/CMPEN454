@@ -1,0 +1,1 @@
+[SED_known_mean,SED_8point_mean] = task6_SED_error(pixels1, pixels2, Fmat_known, Fmat_8point)

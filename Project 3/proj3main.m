@@ -67,5 +67,6 @@ function [smpl_bg_out, smpl_fd_out, adaptive_bg_out, persistent_fd_out, combined
         imwrite(motionframe_persistent, persistent_frame);
 
         combined_out = [motionframe_smpl_bg, motionframe_smpl_fd; motionframe_adaptive_bg, motionframe_persistent];
-
+        figure(1); imagesc(combined_out)
     end
+

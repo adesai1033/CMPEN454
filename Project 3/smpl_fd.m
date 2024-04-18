@@ -1,10 +1,10 @@
-function [smpl_fd_out] = smpl_fd(frames)
+function [smpl_fd_out] = smpl_fd(frames, threshold)
     % Define the background image file
     backgroundFilename = fullfile(frames, 'f0001.jpg');
     background = imread(backgroundFilename);
     background = rgb2gray(background);
 
-    thresholdValue = 30;
+
 
     % Define the output directory
     smpl_fd_out = fullfile(frames, 'smpl_fd_out');
@@ -24,11 +24,13 @@ function [smpl_fd_out] = smpl_fd(frames)
         
         diffFrame = abs(double(currentFrameGray) - double(background));
         
-        %background = currentFrameGray; % Adaptive background updating
-        mask = diffFrame > thresholdValue;
+        background = currentFrameGray; % Adaptive background updating
+        mask = diffFrame > threshold;
 
         % Define file name (out%04d.png, i) and write calculated image to that file path
         smpl_fd_frame = fullfile(smpl_fd_out, sprintf('out%04d.png', i));
         imwrite(mask, smpl_fd_frame);
+
+        
     end
 end

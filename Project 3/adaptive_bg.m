@@ -1,11 +1,8 @@
-function [adaptive_bg_out] = adaptive_bg(frames)
+function [adaptive_bg_out] = adaptive_bg(frames, threshold, alpha)
     % Define the background image file
     backgroundFilename = fullfile(frames, 'f0001.jpg');
     background = imread(backgroundFilename);
     background = rgb2gray(background);
-
-    thresholdValue = 30;
-    alpha = 0.05; % Blending factor, adjust this based on the desired responsiveness
 
     % Define the output directory
     adaptive_bg_out = fullfile(frames, 'adaptive_bg_out');
@@ -28,8 +25,9 @@ function [adaptive_bg_out] = adaptive_bg(frames)
         
         % Calculate frame difference
         diffFrame = abs(double(currentFrameGray) - background);
-        
-        mask = diffFrame > thresholdValue;
+        mask = diffFrame > threshold;
+
+   
 
         % Define file name for output (out%04d.png, i) and write mask to that file path
         adaptive_bg_frame = fullfile(adaptive_bg_out, sprintf('out%04d.png', i));

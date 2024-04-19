@@ -26,6 +26,8 @@ function [smpl_fd_out] = smpl_fd(frames, threshold)
         
         background = currentFrameGray; % Adaptive background updating
         mask = diffFrame > threshold;
+        
+
 
         % Define file name (out%04d.png, i) and write calculated image to that file path
         smpl_fd_frame = fullfile(smpl_fd_out, sprintf('out%04d.png', i));

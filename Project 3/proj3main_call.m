@@ -1,7 +1,18 @@
-frames = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/walk';
-maxframenum = 283;
-abs_diff_threshold = 10;
-alpha_parameter = 0.3;
-gamma_parameter = 30;
+walk = 'DataSets/walk';
+trees = 'DataSets/trees';
+movecam = 'DataSets/movecam';
+getout = 'DataSets/getout';
+getin = 'DataSets/getin';
+AShipDeck = 'DataSets/AShipDeck';
+APossum = 'DataSets/APossum';
+ADeerBackyard = 'DataSets/ADeerBackyard';
+AAnts = 'DataSets/AAnts';
 
-proj3main(frames, maxframenum, abs_diff_threshold, alpha_parameter, gamma_parameter)
+dirstring = walk;
+maxframenum = length(dir(fullfile(dirstring, 'f*.jpg')));
+
+abs_diff_threshold = 45;
+alpha_parameter = 0.15;
+gamma_parameter = 5;
+
+proj3main(dirstring, maxframenum, abs_diff_threshold, alpha_parameter, gamma_parameter)

@@ -1,38 +1,40 @@
-function [smpl_fd_out] = smpl_fd(frames, threshold)
-    % Define the background image file
-    backgroundFilename = fullfile(frames, 'f0001.jpg');
+function [smpl_fd_out] = smpl_fd(dirstring, threshold)
+
+    %Initialize background
+    backgroundFilename = fullfile(dirstring, 'f0001.jpg');
     background = imread(backgroundFilename);
     background = rgb2gray(background);
 
-
-
-    % Define the output directory
-    smpl_fd_out = fullfile(frames, 'smpl_fd_out');
+    %Initialize output directory
+    smpl_fd_out = fullfile(dirstring, 'smpl_fd_out');
     if ~exist(smpl_fd_out, 'dir')
         mkdir(smpl_fd_out);
     end
 
-    imageFiles = dir(fullfile(frames, 'f*.jpg'));
+    %Convert to list of images
+    imageFiles = dir(fullfile(dirstring, 'f*.jpg'));
 
-    % Process each image
+    %Process each frame, starts from 2 b/c background already processed
     for i = 2:length(imageFiles)
-        % Generate filename for the current frame
-        currentFrameFilename = fullfile(frames, sprintf('f%04d.jpg', i));
-        
+
+        %Get current frame and grayscale
+        currentFrameFilename = fullfile(dirstring, sprintf('f%04d.jpg', i));
         currentFrame = imread(currentFrameFilename);
         currentFrameGray = rgb2gray(currentFrame);
         
+        %Compute difference  frameand apply threshold
         diffFrame = abs(double(currentFrameGray) - double(background));
-        
-        background = currentFrameGray; % Adaptive background updating
-        mask = diffFrame > threshold;
-        mask = uint8(mask*255);
+        binaryOut = diffFrame > threshold;
+        binaryOut = uint8(binaryOut*255);
 
+        %Update background
+        background = currentFrameGray;
 
-        % Define file name (out%04d.png, i) and write calculated image to that file path
+        %Write motion frame to folder
         smpl_fd_frame = fullfile(smpl_fd_out, sprintf('out%04d.png', i-1));
-        imwrite(mask, smpl_fd_frame);
+        imwrite(binaryOut, smpl_fd_frame);
 
+        
         
     end
 end

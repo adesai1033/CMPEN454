@@ -1,29 +1,33 @@
-function proj3main(frames, maxframenum, threshold, alpha, gamma)
+function proj3main(dirstring, maxframenum, threshold, alpha, gamma)
 
-    
-    % Process frames with different background subtraction methods
-    smpl_bg_out = smpl_bg(frames, threshold);
-    smpl_fd_out = smpl_fd(frames, threshold);
-    adaptive_bg_out = adaptive_bg(frames, threshold, alpha);
-    persistent_fd_out = persistent_fd(frames, threshold, gamma);
+    %Get output directory of each algorithm
+    smpl_bg_out = smpl_bg(dirstring, threshold);
+    smpl_fd_out = smpl_fd(dirstring, threshold);
+    adaptive_bg_out = adaptive_bg(dirstring, threshold, alpha);
+    persistent_fd_out = persistent_fd(dirstring, threshold, gamma);
 
-    % List output files for each method
-     imageFiles = dir(fullfile(frames, 'f*.jpg'));
-   
+    %Initialize directory
+    quad_output_dir = fullfile(dirstring, 'quad_out');
+    if ~exist(quad_output_dir, 'dir')
+        mkdir(quad_output_dir);
+    end
 
-    % Loop through the output files and display combined results
-     for i = 1:maxframenum-1 %or length imageFiles
-        % Construct filenames assuming they follow the 'outXXXX.png' format
+    %Iterate through each frame
+    for i = 1:maxframenum-1 % -1 b/c one less output frame then inputs
+
+        %Get current output frame from each algorithm
         img1 = imread(fullfile(smpl_bg_out, sprintf('out%04d.png', i)));
         img2 = imread(fullfile(smpl_fd_out, sprintf('out%04d.png', i)));
         img3 = imread(fullfile(adaptive_bg_out, sprintf('out%04d.png', i)));
         img4 = imread(fullfile(persistent_fd_out, sprintf('out%04d.png', i)));
 
-        
-        combined_out = [img1 img2; img3 img4];
-        figure(1); imshow(combined_out);
-        %colormap(gray);  % Apply grayscale colormap
-        
+        % Combine to quad image and write to directory
+        quad_image = [img1 img2; img3 img4];
+        quad_out_frame = fullfile(quad_output_dir, sprintf('quad_out%04d.png', i));
+        imwrite(quad_image, quad_out_frame);
 
+        %Display quad image
+        figure(1); imshow(quad_image);
+        
     end
 end

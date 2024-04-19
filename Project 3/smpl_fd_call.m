@@ -1,13 +1,12 @@
-
-walk = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/walk';
-trees = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/trees';
-movecam = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/movecam';
-getout = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/getout';
-getin = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/getin';
-AShipDeck = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/AShipDeck';
-APossum = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/APossum';
-ADeerBackyard = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/ADeerBackyard';
-AAnts = '/Users/abhidesai/Desktop/C/Education/School/Semester 6/CMPEN 454/Project 3/DataSets/AAnts';
+walk = 'DataSets/walk';
+trees = 'DataSets/trees';
+movecam = 'DataSets/movecam';
+getout = 'DataSets/getout';
+getin = 'DataSets/getin';
+AShipDeck = 'DataSets/AShipDeck';
+APossum = 'DataSets/APossum';
+ADeerBackyard = 'DataSets/ADeerBackyard';
+AAnts = 'DataSets/AAnts';
 threshold = 30;
 alpha = 0.2;
 

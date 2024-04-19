@@ -1,4 +1,5 @@
-function proj3main(frames, threshold, alpha, gamma)
+function proj3main(frames, maxframenum, threshold, alpha, gamma)
+
     
     % Process frames with different background subtraction methods
     smpl_bg_out = smpl_bg(frames, threshold);
@@ -7,21 +8,22 @@ function proj3main(frames, threshold, alpha, gamma)
     persistent_fd_out = persistent_fd(frames, threshold, gamma);
 
     % List output files for each method
-    smpl_bg_outFiles = dir(fullfile(smpl_bg_out, 'out*.jpg'));
-    smpl_fd_outFiles = dir(fullfile(smpl_fd_out, 'out*.jpg'));
-    adaptive_bg_outFiles = dir(fullfile(adaptive_bg_out, 'out*.jpg'));
-    persistent_fd_outFiles = dir(fullfile(persistent_fd_out, 'out*.jpg'));
+     imageFiles = dir(fullfile(frames, 'f*.jpg'));
+   
 
     % Loop through the output files and display combined results
-    for i = 1:length(smpl_bg_outFiles)
-        img1 = imread(fullfile(smpl_bg_out, smpl_bg_outFiles(i).name));
-        img2 = imread(fullfile(smpl_fd_out, smpl_fd_outFiles(i).name));
-        img3 = imread(fullfile(adaptive_bg_out, adaptive_bg_outFiles(i).name));
-        img4 = imread(fullfile(persistent_fd_out, persistent_fd_outFiles(i).name));
+     for i = 1:maxframenum-1 %or length imageFiles
+        % Construct filenames assuming they follow the 'outXXXX.png' format
+        img1 = imread(fullfile(smpl_bg_out, sprintf('out%04d.png', i)));
+        img2 = imread(fullfile(smpl_fd_out, sprintf('out%04d.png', i)));
+        img3 = imread(fullfile(adaptive_bg_out, sprintf('out%04d.png', i)));
+        img4 = imread(fullfile(persistent_fd_out, sprintf('out%04d.png', i)));
 
-        % Combine images into a single figure
-        combined_out = [img1, img2; img3, img4];
-        figure;
-        imshow(combined_out);
+        
+        combined_out = [img1 img2; img3 img4];
+        figure(1); imshow(combined_out);
+        %colormap(gray);  % Apply grayscale colormap
+        
+
     end
 end

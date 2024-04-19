@@ -26,11 +26,11 @@ function [adaptive_bg_out] = adaptive_bg(frames, threshold, alpha)
         % Calculate frame difference
         diffFrame = abs(double(currentFrameGray) - background);
         mask = diffFrame > threshold;
-
+        mask = uint8(mask*255);
    
 
         % Define file name for output (out%04d.png, i) and write mask to that file path
-        adaptive_bg_frame = fullfile(adaptive_bg_out, sprintf('out%04d.png', i));
+        adaptive_bg_frame = fullfile(adaptive_bg_out, sprintf('out%04d.png', i-1));
         imwrite(mask, adaptive_bg_frame);
     end
 end

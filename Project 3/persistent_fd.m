@@ -48,7 +48,7 @@ function [persistent_fd_out] = persistent_fd(frames, threshold, gamma)
         %motionframe_persistent_uint8 = uint8(motionframe_persistent_scaled);
 
         % Save the motion frame as an 8-bit image
-        persistent_fd_frame = fullfile(persistent_fd_out, sprintf('out%04d.png', i));
+        persistent_fd_frame = fullfile(persistent_fd_out, sprintf('out%04d.png', i-1));
         imwrite(motionframe_persistent, persistent_fd_frame);
 
     end
